@@ -12,13 +12,15 @@ import {
   type TeleprompterColors,
 } from '@/components/session/teleprompter';
 import { palette } from '@/constants/colors';
-import { getPassage, PASSAGES } from '@/constants/passages';
+import { PASSAGES } from '@/constants/passages';
 import {
   sessionColors,
   TELEPROMPTER_TEXT_SIZES,
 } from '@/constants/session-theme';
 import { usePracticeSession } from '@/hooks/use-practice-session';
+import { getAnyPassage, modeForId } from '@/lib/passage-catalog';
 import { tokenizePassage } from '@/lib/passage-text';
+import { recordSession } from '@/services/session-history';
 
 import { useSessionContext } from './_layout';
 
@@ -32,7 +34,7 @@ function dismissToHome() {
 
 export default function PracticeScreen() {
   const { passageId } = useLocalSearchParams<{ passageId: string }>();
-  const found = getPassage(passageId);
+  const found = getAnyPassage(passageId);
   // Hooks must run unconditionally; the guard effect below backs out of the
   // route when the id is unknown before anything is visible.
   const passage = found ?? PASSAGES[0];
@@ -88,12 +90,14 @@ export default function PracticeScreen() {
     navigatedRef.current = true;
     try {
       const result = await sessionRef.current.stop();
+      // Once per attempt (navigatedRef); each retry becomes its own record.
+      recordSession(result, { mode: modeForId(passage.id), passageId: passage.id });
       setResult(result);
       router.push('/session/results');
     } catch {
       navigatedRef.current = false;
     }
-  }, [setResult]);
+  }, [setResult, passage.id]);
 
   // The session can complete on its own (end of passage reached).
   useEffect(() => {

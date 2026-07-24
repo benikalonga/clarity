@@ -19,8 +19,15 @@ import {
   buildContextualStrings,
   selectBestHypothesis,
 } from '@/services/live-recognition';
+import { claimEngine, releaseEngine } from '@/services/recognition-owner';
 import { buildAzureResult, buildChunks, buildLiveFallbackResult } from '@/services/scoring';
-import { concatWavs, downsampleWaveform, sliceWav, wavDurationMs } from '@/services/wav';
+import {
+  concatWavs,
+  downsampleWaveform,
+  sliceWav,
+  waveformFromMeterHistory,
+  wavDurationMs,
+} from '@/services/wav';
 import type {
   Passage,
   PracticeError,
@@ -99,22 +106,6 @@ function deleteSegmentFiles(m: Machine) {
   }
   m.segmentUris = [];
 }
-
-function waveformFromMeterHistory(history: number[]): number[] {
-  if (history.length === 0) return Array.from({ length: 30 }, () => 0.15);
-  const buckets = Array.from({ length: 30 }, (_, b) => {
-    const start = Math.floor((b * history.length) / 30);
-    const end = Math.max(start + 1, Math.floor(((b + 1) * history.length) / 30));
-    let sum = 0;
-    for (let i = start; i < end; i++) sum += history[i];
-    return sum / (end - start);
-  });
-  const peak = Math.max(...buckets, 1e-6);
-  return buckets.map((value) => Math.min(1, Math.max(0.08, value / peak)));
-}
-
-/** Only one engine may drive the native recognizer at a time. */
-let engineOwner: symbol | null = null;
 
 function makeSessionId(): string {
   return `${Date.now().toString(36)}-${Math.floor(Math.random() * 0xffff).toString(16)}`;
@@ -487,7 +478,7 @@ export function usePracticeSession(passage: Passage): PracticeSession {
     return () => {
       mounted.current = false;
       const m = machineRef.current!;
-      if (engineOwner === instanceId) engineOwner = null;
+      releaseEngine(instanceId);
       if (m.status === 'listening' || m.status === 'paused') {
         m.expectEnd = true;
         m.speechActive = false;
@@ -629,21 +620,14 @@ export function usePracticeSession(passage: Passage): PracticeSession {
       async start() {
         const m = machineRef.current!;
         if (m.status === 'listening' || m.status === 'processing') return;
-        if (engineOwner != null && engineOwner !== instanceId) {
-          try {
-            ExpoSpeechRecognitionModule.abort();
-          } catch {
-            // stale owner
-          }
-        }
-        engineOwner = instanceId;
+        claimEngine(instanceId);
         resetMachine(m);
         // Bail out immediately where SFSpeechRecognizer doesn't exist at all
         // (e.g. iOS simulators) instead of burning the auto-restart budget.
         if (!ExpoSpeechRecognitionModule.isRecognitionAvailable()) {
           fail(
             'recognition-unavailable',
-            'Speech recognition is not available on this device (simulators usually lack it — try a physical device).',
+            'Speech recognition is not available on this device (simulators usually lack it; try a physical device).',
           );
           return;
         }
@@ -724,7 +708,7 @@ export function usePracticeSession(passage: Passage): PracticeSession {
           // already inactive
         }
         deleteSegmentFiles(m);
-        if (engineOwner === instanceId) engineOwner = null;
+        releaseEngine(instanceId);
         setStatusSafe('idle');
       },
 
@@ -766,7 +750,7 @@ export function usePracticeSession(passage: Passage): PracticeSession {
         m.result = finalResult;
         if (mounted.current) setResult(finalResult);
         setStatusSafe('done');
-        if (engineOwner === instanceId) engineOwner = null;
+        releaseEngine(instanceId);
         // Segment files are merged into the full WAV — clean them up.
         deleteSegmentFiles(m);
         return finalResult;
