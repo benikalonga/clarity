@@ -6,7 +6,19 @@
     {
       "layers" : [
         {
+          "blend-mode-specializations" : [
+            {
+              "value" : "normal"
+            },
+            {
+              "appearance" : "dark",
+              "value" : "normal"
+            }
+          ],
           "fill-specializations" : [
+            {
+              "value" : "none"
+            },
             {
               "appearance" : "dark",
               "value" : {
@@ -21,7 +33,13 @@
             }
           ],
           "image-name" : "icon-speech.svg",
-          "name" : "icon-speech"
+          "name" : "icon-speech",
+          "opacity-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : 1
+            }
+          ]
         }
       ],
       "shadow" : {
