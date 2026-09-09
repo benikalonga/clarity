@@ -136,7 +136,7 @@
     },
     "extra": {
       "router": {
-        "origin": "https://your-expo-username-clarity.expo.app"
+        "origin": "https://clarityapp.expo.app"
       },
       "eas": {
         "projectId": "00000000-0000-0000-0000-000000000000"
