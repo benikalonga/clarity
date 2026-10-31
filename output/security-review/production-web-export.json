@@ -1,7 +1,0 @@
-{
-  "platform": "web",
-  "productionEnvironment": true,
-  "scanned": 41,
-  "secretMatches": [],
-  "exportPath": "/tmp/clarity-security-web-export"
-}

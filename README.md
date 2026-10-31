@@ -2,8 +2,6 @@
 
 # Clarity
 
-![Clarity app screens](gh-preview.png)
-
 Clarity is a speech-practice app for iOS and Android. Read a passage, work
 through a one-minute drill, or speak off the cuff. Clarity follows along,
 scores the session, and turns the result into a concrete next step.
