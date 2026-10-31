@@ -1,3 +1,5 @@
+> **Note:** This is a copy of [SchroederNathan/clarity](https://github.com/SchroederNathan/clarity), kept for AI code-review research. All credit goes to the original authors. Licensed under the original [MIT License](./LICENSE). See [UPSTREAM.md](./UPSTREAM.md) for details.
+
 # Clarity
 
 ![Clarity app screens](gh-preview.png)
