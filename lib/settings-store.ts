@@ -3,7 +3,7 @@
  *
  * PURE module. The key-value backend is injected as `KvBackend` (the same
  * interface `lib/history-store.ts` defines), so this runs under bun in
- * `scripts/test-settings.ts`. `services/settings.ts` owns the singleton and the
+ * `tests/test-settings.ts`. `services/settings.ts` owns the singleton and the
  * React glue.
  *
  * Two properties carried over from the history store, for the same reasons:

@@ -1,6 +1,6 @@
 /**
  * Self-tests for the sync planner. Pure JS — run with:
- *   bun scripts/test-sync.ts
+ *   bun tests/test-sync.ts
  *
  * Covers the decisions the sync component executes: which sessions to push and
  * when the cursor may jump, the passage set diff with pending deletes, and the

@@ -4,7 +4,7 @@
  * PURE module: no React, no `services/`, no Convex client. The sync component
  * (`components/convex-sync.tsx`) feeds it the local snapshots, the remote query
  * results, and the durable cursors, and executes whatever comes back. Keeping
- * the decisions here is what lets `scripts/test-sync.ts` cover them under bun
+ * the decisions here is what lets `tests/test-sync.ts` cover them under bun
  * with no simulator and no deployment.
  *
  * The rules, per store:

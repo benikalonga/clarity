@@ -8,7 +8,7 @@
  * total — every payload either yields a valid record or a reason it didn't.
  *
  * PURE module: no React, no `services/`, no react-native imports. Runs under
- * bun for `scripts/test-history.ts`, which is the point — the schema and
+ * bun for `tests/test-history.ts`, which is the point — the schema and
  * migration logic are testable without the native storage module.
  */
 

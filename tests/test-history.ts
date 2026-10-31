@@ -4,7 +4,7 @@
  * crash recovery, word aggregates, and export/import.
  *
  * Pure JS — run with:
- *   bun scripts/test-history.ts
+ *   bun tests/test-history.ts
  *
  * The store takes its key-value backend as a parameter, so all of this runs
  * against an in-memory map with no native module and no simulator.

@@ -1,7 +1,7 @@
 /**
  * Self-tests for assessment-to-reference anchoring and the timing-derived
  * measures. Pure JS — run with:
- *   bun scripts/test-scoring.ts
+ *   bun tests/test-scoring.ts
  */
 
 import { tokenizePassage } from '@/lib/passage-text';

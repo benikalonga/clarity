@@ -1,6 +1,6 @@
 /**
  * Self-tests for the anchored greedy aligner. Pure JS — run with:
- *   bun scripts/test-alignment.ts
+ *   bun tests/test-alignment.ts
  */
 
 import { tokenizePassage } from '@/lib/passage-text';

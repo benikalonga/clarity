@@ -1,6 +1,6 @@
 /**
  * Self-tests for the settings store. Pure JS — run with:
- *   bun scripts/test-settings.ts
+ *   bun tests/test-settings.ts
  */
 
 import { ACCENTS, accentFor, hasPhonemeDetail } from '@/constants/accents';

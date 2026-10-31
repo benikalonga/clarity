@@ -1,6 +1,6 @@
 /**
  * Self-tests for derived practice statistics. Pure JS — run with:
- *   bun scripts/test-stats.ts
+ *   bun tests/test-stats.ts
  */
 
 import { formatDayRange } from '@/lib/format';

@@ -1,6 +1,6 @@
 /**
  * Self-tests for the Clarity Pro entitlement read model. Pure JS — run with:
- *   bun scripts/test-entitlements.ts
+ *   bun tests/test-entitlements.ts
  *
  * These matter more than their size suggests: every one of these branches is a
  * paying customer either locked out of what they bought or handed access they

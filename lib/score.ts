@@ -8,7 +8,7 @@
  *
  * PURE module — no React, no imports from `services/`. This sits at the bottom
  * of the dependency graph: `services/scoring.ts` and `lib/stats.ts` both import
- * from here, never the reverse. Runs under bun for `scripts/test-stats.ts`.
+ * from here, never the reverse. Runs under bun for `tests/test-stats.ts`.
  */
 
 import { SCORE_BANDS, SKILL_ORDER } from '@/constants/metrics';

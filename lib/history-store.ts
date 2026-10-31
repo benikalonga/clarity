@@ -4,7 +4,7 @@
  *
  * PURE module. The key-value backend is injected as `KvBackend`, so everything
  * here — including the riskiest logic, migration and quarantine — runs under bun
- * against `createMemoryKv()` in `scripts/test-history.ts`. `services/storage.ts`
+ * against `createMemoryKv()` in `tests/test-history.ts`. `services/storage.ts`
  * supplies the MMKV backend in the app, and `services/session-history.ts` owns
  * the module-level singleton and the React glue.
  *

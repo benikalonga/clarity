@@ -1,7 +1,7 @@
 /**
  * Everything the app knows about Clarity Pro access, read off a RevenueCat
  * `CustomerInfo`. PURE — no React, no SDK calls, no persistence — so it runs
- * under bun in scripts/tests and can be driven from a fixture.
+ * under bun in tests/ and can be driven from a fixture.
  *
  * RevenueCat is the only source of truth for entitlements. Nothing here caches
  * or mirrors that state: `services/purchases.ts` hands over the `CustomerInfo`

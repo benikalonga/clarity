@@ -71,7 +71,7 @@ removed; its historical data remains in Observe.
 
 ## Validation and delivery
 
-Run `bun scripts/test-observe.tsx` for hook and catalog regressions, or `bun run test`
+Run `bun tests/test-observe.tsx` for hook and catalog regressions, or `bun run test`
 for the whole suite. These checks mock native delivery and never send events.
 
 For device validation, use a development build with

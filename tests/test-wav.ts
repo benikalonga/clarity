@@ -1,7 +1,7 @@
 /**
  * Self-tests for WAV parsing/slicing/concat/downsampling and the scoring
  * chunker + aggregation. Pure JS — run with:
- *   bun scripts/test-wav.ts
+ *   bun tests/test-wav.ts
  */
 
 import { tokenizePassage } from '@/lib/passage-text';

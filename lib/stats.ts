@@ -3,7 +3,7 @@
  * skill profile that drives recommendations, and the windowed aggregates the
  * Home and Analytics screens consume.
  *
- * PURE module: runs under bun for scripts/test-stats.ts. All "today" math takes
+ * PURE module: runs under bun for tests/test-stats.ts. All "today" math takes
  * an explicit `now` timestamp so tests are deterministic — and in the app that
  * `now` comes from the one shared clock (`services/clock.ts`), so every screen
  * agrees about which day it is.

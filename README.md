@@ -164,8 +164,7 @@ lib/              Pure scoring, alignment, history, and statistics logic
 constants/        Theme tokens, passages, drills, topics, goals, and vocabulary
 convex/           Authenticated backend functions and schema
 types/            Shared TypeScript models
-scripts/          Bun logic suites and release support scripts
-.eas/workflows/   Preview, TestFlight, feedback triage, and verified-fix workflows
+tests/            Bun logic suites
 ```
 
 Screens read synchronously from the local stores. `components/convex-sync.tsx`
@@ -187,11 +186,6 @@ side. EAS has four build profiles:
 - `preview` creates an internal build on the preview update channel.
 - `simulator` creates a deterministic iOS QA build against development services.
 - `production` creates the store build and auto-increments its version.
-
-The EAS workflow on `main` fingerprints the native layer, builds or repacks the
-iOS binary, and uploads it to TestFlight. The feedback workflows can turn
-TestFlight reports or GitHub issues into simulator-verified fix pull requests.
-See [the workflow guide](.eas/workflows/README.md) for setup and operating notes.
 
 ## License
 

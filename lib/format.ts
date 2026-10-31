@@ -1,5 +1,5 @@
 /** Tiny presentation-time formatters. PURE — no React, deterministic given an
- * explicit `now`, so they run under bun in scripts/tests. */
+ * explicit `now`, so they run under bun in tests/. */
 
 const MINUTE = 60_000;
 const HOUR = 3_600_000;
